@@ -9,16 +9,16 @@ namespace AppointmentScheduling.Controllers
 {
     public class AppointmentController : Controller
     {
-        private readonly AppointmentService _appointmentService;
+        private readonly IAppointmentService _appointmentService;
 
-        public AppointmentController(AppointmentService appointmentService)
+        public AppointmentController(IAppointmentService appointmentService)
         {
             _appointmentService = appointmentService;
         }
 
         public IActionResult Index()
         {
-            _appointmentService.GetDoctorList();
+            ViewBag.DoctorList = _appointmentService.GetDoctorList();
 
             return View();
         }
