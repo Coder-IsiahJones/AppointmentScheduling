@@ -16,6 +16,9 @@ function InitializeCalendar() {
                 },
                 selectable: true,
                 editable: false,
+                select: function (event) {
+                    onShowModal(event, null);
+                }
             });
             calendar.render();
         }
@@ -25,4 +28,8 @@ function InitializeCalendar() {
         alert(error);
     }
 
+}
+
+function onShowModal(obj, isEventDetail) {
+    $("#appointmentInput").modal("show");
 }
