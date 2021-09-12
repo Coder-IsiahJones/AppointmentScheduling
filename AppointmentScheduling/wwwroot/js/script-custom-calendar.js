@@ -80,17 +80,24 @@ function onShowModal(obj, isEventDetail) {
         $("#patientId").val(obj.patientId);
         $("#lblPatientName").html(obj.patientName);
         $("#lblDoctorName").html(obj.doctorName);
-        $("#Id").val(obj.Id);
+        $("#id").val(obj.id);
 
         if (obj.isDoctorApproved) {
             $("#lblStatus").html('Approved');
+            $("#btnConfirm").addClass("d-none");
+            $("#btnSubmit").addClass("d-none");
         } else {
             $("#lblStatus").html('Pending');
+            $("#btnConfirm").removeClass("d-none");
+            $("#btnSubmit").removeClass("d-none");
         }
+        $("#btnDelete").removeClass("d-none");
     }
     else {
         $("#appointmentDate").val(obj.startStr + " " + new moment().format("hh:mm A"));
         $("#id").val(0);
+        $("#btnDelete").addClass("d-none");
+        $("#btnSubmit").removeClass("d-none");
     }
 
     $("#appointmentInput").modal("show");
@@ -103,8 +110,6 @@ function onCloseModal() {
     $("#title").val('');
     $("#description").val('');
     $("#appointmentDate").val('');
-    $("#duration").val('');
-    $("#patientId").val('');
 
     $("#appointmentInput").modal("hide");
 }
@@ -183,4 +188,52 @@ function getEventDetailsByEventId(info) {
 
 function onDoctorChange() {
     calendar.refetchEvents();
+}
+
+function onDeleteAppointment() {
+    var id = parseInt($("#id").val());
+    $.ajax({
+        url: routeURL + '/api/Appointment/DeleteAppointment/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
+
+            if (response.status === 1) {
+                $.notify(response.message, "success");
+                calendar.refetchEvents();
+                onCloseModal();
+            }
+            else {
+
+                $.notify(response.message, "error");
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
+}
+
+function onConfirm() {
+    var id = parseInt($("#id").val());
+    $.ajax({
+        url: routeURL + '/api/Appointment/ConfirmEvent/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
+
+            if (response.status === 1) {
+                $.notify(response.message, "success");
+                calendar.refetchEvents();
+                onCloseModal();
+            }
+            else {
+
+                $.notify(response.message, "error");
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
 }

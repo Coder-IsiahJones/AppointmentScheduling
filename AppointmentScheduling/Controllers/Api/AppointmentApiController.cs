@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace AppointmentScheduling.Controllers.Api
 {
@@ -93,6 +94,52 @@ namespace AppointmentScheduling.Controllers.Api
             {
                 commonResponse.dataEnum = _appointmentService.GetById(id);
                 commonResponse.status = Helper.success_code;
+            }
+            catch (Exception ex)
+            {
+                commonResponse.message = ex.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+        [HttpGet]
+        [Route("DeleteAppointment/{id}")]
+        public async Task<IActionResult> DeleteAppointment(int id)
+        {
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                commonResponse.status = await _appointmentService.Delete(id);
+                commonResponse.message = commonResponse.status == 1 ? Helper.appointmentDeleted : Helper.somethingWentWrong;
+            }
+            catch (Exception ex)
+            {
+                commonResponse.message = ex.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+        [HttpGet]
+        [Route("ConfirmEvent/{id}")]
+        public IActionResult ConfirmEvent(int id)
+        {
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                var result = _appointmentService.ConfirmEvent(id).Result;
+
+                if(result > 0)
+                {
+                    commonResponse.status = Helper.success_code;
+                    commonResponse.message = Helper.meetingConfirm;
+                }
+                else
+                {
+                    commonResponse.status = Helper.failure_code;
+                    commonResponse.message = Helper.meetingConfirmError;
+                }
             }
             catch (Exception ex)
             {
