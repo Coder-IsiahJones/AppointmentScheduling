@@ -70,6 +70,17 @@ function InitializeCalendar() {
 }
 
 function onShowModal(obj, isEventDetail) {
+    if (isEventDetail != null) {
+
+        $("#title").val(obj.title);
+        $("#description").val(obj.description);
+        $("#appointmentDate").val(obj.startDate);
+        $("#duration").val(obj.duration);
+        $("#doctorId").val(obj.doctorId);
+        $("#patientId").val(obj.patientId);
+        $("#Id").val(obj.Id);
+    }
+
     $("#appointmentInput").modal("show");
 }
 
@@ -128,4 +139,22 @@ function checkValidation() {
     }
 
     return isValid;
+}
+
+function getEventDetailsByEventId(info) {
+    $.ajax({
+        url: routeURL + '/api/Appointment/GetCalendarDataById/' + info.id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
+
+            if (response.status === 1 && response.dataEnum !== undefined) {
+                onShowModal(response.dataEnum, true);
+            }
+            successCallback(events);
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
 }
