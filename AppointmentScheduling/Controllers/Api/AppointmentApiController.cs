@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace AppointmentScheduling.Controllers.Api
 {
@@ -45,7 +43,6 @@ namespace AppointmentScheduling.Controllers.Api
                 {
                     commonResponse.message = Helper.appointmentAdded;
                 }
-
             }
             catch (Exception ex)
             {

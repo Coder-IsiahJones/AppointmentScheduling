@@ -6,7 +6,6 @@ $(document).ready(function () {
         dateInput: false
     });
 
-
     InitializeCalendar();
 });
 
@@ -64,12 +63,10 @@ function InitializeCalendar() {
             });
             calendar.render();
         }
-
     }
     catch (error) {
         alert(error);
     }
-
 }
 
 function onShowModal(obj, isEventDetail) {
