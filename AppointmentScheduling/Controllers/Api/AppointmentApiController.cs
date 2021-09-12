@@ -23,9 +23,9 @@ namespace AppointmentScheduling.Controllers.Api
         public AppointmentApiController(IAppointmentService appointmentService, IHttpContextAccessor httpContextAccessor)
         {
             _appointmentService = appointmentService;
+            _httpContextAccessor = httpContextAccessor;
             loginUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             role = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
-            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost]
