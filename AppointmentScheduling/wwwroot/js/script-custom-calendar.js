@@ -78,7 +78,15 @@ function onShowModal(obj, isEventDetail) {
         $("#duration").val(obj.duration);
         $("#doctorId").val(obj.doctorId);
         $("#patientId").val(obj.patientId);
+        $("#lblPatientName").html(obj.patientName);
+        $("#lblDoctorName").html(obj.doctorName);
         $("#Id").val(obj.Id);
+
+        if (obj.isDoctorApproved) {
+            $("#lblStatus").html('Approved');
+        } else {
+            $("#lblStatus").html('Pending');
+        }
     }
     else {
         $("#appointmentDate").val(obj.startStr + " " + new moment().format("hh:mm A"));
