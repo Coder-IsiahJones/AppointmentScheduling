@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     InitializeCalendar();
 });
+
 var calendar;
 function InitializeCalendar() {
     try {
@@ -22,12 +23,10 @@ function InitializeCalendar() {
             });
             calendar.render();
         }
-
     }
     catch (error) {
         alert(error);
     }
-
 }
 
 function onShowModal(obj, isEventDetail) {

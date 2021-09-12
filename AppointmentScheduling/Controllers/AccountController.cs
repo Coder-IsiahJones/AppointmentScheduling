@@ -10,9 +10,9 @@ namespace AppointmentScheduling.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _db;
-        UserManager<ApplicationUser> _userManager;
-        SignInManager<ApplicationUser> _signInManager;
-        RoleManager<IdentityRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager;
+        private RoleManager<IdentityRole> _roleManager;
 
         public AccountController(ApplicationDbContext db, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
@@ -68,7 +68,6 @@ namespace AppointmentScheduling.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name
-
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -88,7 +87,6 @@ namespace AppointmentScheduling.Controllers
 
             return View(model);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> LogOff()
