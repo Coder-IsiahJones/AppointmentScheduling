@@ -33,6 +33,20 @@ namespace AppointmentScheduling.Services
             if (model != null && model.Id > 0)
             {
                 // update
+                var appointment = _db.Appointments.FirstOrDefault(x => x.Id == model.Id);
+
+                appointment.Title = model.Title;
+                appointment.Description = model.Description;
+                appointment.StartDate = startDate;
+                appointment.EndDate = endDate;
+                appointment.Duration = model.Duration;
+                appointment.DoctorId = model.DoctorId;
+                appointment.PatientId = model.PatientId;
+                appointment.IsDoctorApproved = false;
+                appointment.AdminId = model.AdminId;
+
+                await _db.SaveChangesAsync();
+
                 return 1;
             }
             else
@@ -66,7 +80,7 @@ namespace AppointmentScheduling.Services
         {
             var appointment = _db.Appointments.FirstOrDefault(x => x.Id == id);
 
-            if(appointment != null)
+            if (appointment != null)
             {
                 appointment.IsDoctorApproved = true;
 
