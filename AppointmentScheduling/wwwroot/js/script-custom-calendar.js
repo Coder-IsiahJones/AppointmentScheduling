@@ -66,8 +66,8 @@ function InitializeCalendar() {
         }
 
     }
-    catch (e) {
-        alert(e);
+    catch (error) {
+        alert(error);
     }
 
 }
