@@ -71,7 +71,6 @@ function InitializeCalendar() {
 
 function onShowModal(obj, isEventDetail) {
     if (isEventDetail != null) {
-
         $("#title").val(obj.title);
         $("#description").val(obj.description);
         $("#appointmentDate").val(obj.startDate);
@@ -174,7 +173,6 @@ function getEventDetailsByEventId(info) {
         type: 'GET',
         dataType: 'JSON',
         success: function (response) {
-
             if (response.status === 1 && response.dataEnum !== undefined) {
                 onShowModal(response.dataEnum, true);
             }
@@ -197,14 +195,12 @@ function onDeleteAppointment() {
         type: 'GET',
         dataType: 'JSON',
         success: function (response) {
-
             if (response.status === 1) {
                 $.notify(response.message, "success");
                 calendar.refetchEvents();
                 onCloseModal();
             }
             else {
-
                 $.notify(response.message, "error");
             }
         },
@@ -221,14 +217,12 @@ function onConfirm() {
         type: 'GET',
         dataType: 'JSON',
         success: function (response) {
-
             if (response.status === 1) {
                 $.notify(response.message, "success");
                 calendar.refetchEvents();
                 onCloseModal();
             }
             else {
-
                 $.notify(response.message, "error");
             }
         },

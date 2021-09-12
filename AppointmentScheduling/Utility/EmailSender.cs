@@ -3,9 +3,6 @@ using Mailjet.Client.Resources;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AppointmentScheduling.Utility
@@ -26,7 +23,6 @@ namespace AppointmentScheduling.Utility
 
             MailjetClient client = new MailjetClient(api_key, secret_Key);
             {
-
             };
             MailjetRequest request = new MailjetRequest
             {
@@ -42,8 +38,6 @@ namespace AppointmentScheduling.Utility
                  }
                });
             MailjetResponse response = await client.PostAsync(request);
-
-
         }
     }
 }

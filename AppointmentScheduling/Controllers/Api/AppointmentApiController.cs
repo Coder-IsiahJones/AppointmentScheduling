@@ -130,7 +130,7 @@ namespace AppointmentScheduling.Controllers.Api
             {
                 var result = _appointmentService.ConfirmEvent(id).Result;
 
-                if(result > 0)
+                if (result > 0)
                 {
                     commonResponse.status = Helper.success_code;
                     commonResponse.message = Helper.meetingConfirm;
